@@ -7,10 +7,14 @@ import classNames from 'classnames'
 import './ItemPage.css'
 import { QuantityBox } from './QuantityBox'
 import { Loading } from './Loading'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useItemByIdQuery } from './admin/items/service'
 import { MyRootState } from '../store'
 import { Item } from '../decl'
+import { itemPictureLocationFor } from './Picture'
+import { StorageImage } from '@aws-amplify/ui-react-storage'
+import { useCreateCartItemMutation } from './cart/service'
+import { enqueueSnackbar } from 'notistack'
 
 export const ItemCardPage = props => {
     const params = useParams() as { Id: string }
@@ -36,7 +40,7 @@ export const ItemCardPage = props => {
 }
 
 interface ItemCardProps {
-    item: Item 
+    item: Item
 }
 export const ItemCard = (props: ItemCardProps) => {
     /** @type {Item} */
@@ -45,12 +49,14 @@ export const ItemCard = (props: ItemCardProps) => {
     const dispatch = useDispatch()
     const isCarted = useSelector((state: MyRootState) => selectIsCarted(state, item.Id))
     const cartItemQuantity = useSelector((state: MyRootState) => selectCartItemQuantity(state, item.Id))
-    const [itemQuantity, setItemQuantity] = useState(isCarted ? cartItemQuantity : 1)
+    const [itemQuantity, setItemQuantity] = useState(1)
+    const [createCartItem] = useCreateCartItemMutation()
+    const navigate = useNavigate()
 
     const onQuantityChanged = (itemQuantity: number) => setItemQuantity(itemQuantity)
 
 
- 
+
     const pictures = item.Pictures
 
 
@@ -65,8 +71,9 @@ export const ItemCard = (props: ItemCardProps) => {
                     onClick={changeCurrentPicture}
                     key={index}
                 >
-                    <img
-                        src={picture.PictureUrl}
+                    <StorageImage
+                        alt={item.Description}
+                        path={itemPictureLocationFor(picture.PictureUrl)}
                         className="thumbnail-picture"
                     />
                 </li>
@@ -74,21 +81,39 @@ export const ItemCard = (props: ItemCardProps) => {
         }
     })
 
-    const addToCart = () => {
-        dispatch(cartAdded({
-            ...item,
-            itemQuantity
-        }))
+    const addToCart = async () => {
+        createCartItem({
+            ItemId: props.item.Id,
+            Quantity: itemQuantity
+        })
+        setItemQuantity(0)
+        enqueueSnackbar('Item added to cart', { variant: 'success' })
     }
 
+    async function buyItNowHandler() {
+        if(itemQuantity == 0) { 
+            // already carted
+            return navigate('/cart')
+
+        }
+        let result = await createCartItem({
+            ItemId: props.item.Id,
+            Quantity: itemQuantity
+        })
+
+        if (!result.error) {
+            navigate('/cart')
+        }
+    }
     return (
         <div className="itempage">
             <div>
                 <div className="item-images">
                     <div>
-                        <img
+                        <StorageImage
+                            alt={item.Description}
+                            path={itemPictureLocationFor(pictures[currentPictureIdx]?.PictureUrl)}
                             className="item-current-image"
-                            src={pictures[currentPictureIdx]?.PictureUrl}
                         />
                     </div>
                     <div className="thumbnails">
@@ -103,8 +128,9 @@ export const ItemCard = (props: ItemCardProps) => {
                     <h1>
                         {item.Description}
                     </h1>
+                    <p> {item.Model}</p>
                     <p>
-                        {item.Model}
+                        {item.DetailedDescription}
                     </p>
                     <h2>{item.UnitPrice}</h2>
                     <div>
@@ -121,16 +147,16 @@ export const ItemCard = (props: ItemCardProps) => {
                         })}>
                         {isCarted ? "CARTED" : "ADD TO CART"}
                     </button>
-                    <button className="buy-it-now">
+                    <button className="buy-it-now" onClick={buyItNowHandler}>
                         BUY IT NOW
                     </button>
                 </div>
 
                 <div className="item-info">
 
-                    <p>
+                    {/* <p>
                         {item.Model}
-                    </p>
+                    </p> */}
                     {/* <p>{item.quantity} </p> */}
                 </div>
 

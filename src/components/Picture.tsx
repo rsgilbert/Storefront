@@ -5,15 +5,22 @@ import { StorageImage } from '@aws-amplify/ui-react-storage'
 interface PictureProps {
     picture: string
 }
+
+
+export const itemPicturePrefix = 'item-pictures/'
+export function itemPictureLocationFor(filename: string ) {
+    return `${itemPicturePrefix}${filename}`
+}
+
 export const Picture = (props: PictureProps) => {
 
 
     return (
         <div>
             <StorageImage
-                alt={props.picture}
-                path={props.picture}
-                className="picture"
+                alt="Item Picture"
+                path={itemPictureLocationFor(props.picture)}
+                className="picture"            
             />
         </div>
     )

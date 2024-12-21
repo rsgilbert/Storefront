@@ -2,6 +2,8 @@ import React from 'react'
 import './Item.css'
 import { useNavigate } from 'react-router-dom'
 import { ItemRecord } from '../decl'
+import { itemPictureLocationFor } from './Picture'
+import { StorageImage } from '@aws-amplify/ui-react-storage'
 
 
 
@@ -21,15 +23,18 @@ export const Item = ({ item }) => {
 
     return (
         <figure className="item-figure" onClick={goToItemPage}>
-            <img 
-                src={picture?.PictureUrl}
-                />
+            <StorageImage
+                alt={item.Description}
+                path={itemPictureLocationFor(picture?.PictureUrl)}
+                className="picture"
+            />
+
             <figcaption>
                 <div className="item-name">
-                    { item.Description}
+                    {item.Description}
                 </div>
-                <div className="item-price"> 
-                    { item.UnitPrice.toLocaleString() }
+                <div className="item-price">
+                    {item.UnitPrice.toLocaleString()}
                 </div>
             </figcaption>
         </figure>

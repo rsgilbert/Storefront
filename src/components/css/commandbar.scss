@@ -1,6 +1,7 @@
 @use "sass:color";
 
-$commandBarBackgroundColor : rgb(238, 253, 253);
+$commandBarBackgroundColor :rgb(231, 248, 252);
+$commandBarHoverBackgroundColor: rgb(96, 186, 186);
 
 .commandbar {
     margin: 16px 0;
@@ -25,7 +26,7 @@ $commandBarBackgroundColor : rgb(238, 253, 253);
                 // font-weight: 700;
                 padding-bottom: 0;
                 // font-weight: 700;
-                border-bottom: 4px solid  color.adjust($commandBarBackgroundColor, $lightness: 55%);
+                border-bottom: 4px solid  $commandBarHoverBackgroundColor;
             }
 
             .danger {

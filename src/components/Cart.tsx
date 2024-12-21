@@ -5,10 +5,13 @@ import './Cart.css'
 import { useSelector } from 'react-redux'
 import { selectCartCount } from '../features/cart/cartSlice'
 import { useNavigate } from 'react-router-dom'
+import { useCartItemsQuery } from './cart/service'
 
 
 export const Cart = props => {
-    const cartCount = useSelector(selectCartCount)
+    const {data, isLoading} = useCartItemsQuery()
+
+    const cartCount = data?.length || 0;
     const navigate = useNavigate()
 
     const goToCart = () => navigate("/cart")

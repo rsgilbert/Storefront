@@ -1,0 +1,13 @@
+.edit-item-pictures {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    width: 100%;
+    overflow-x: scroll;
+    padding: 16px 0;
+}
+
+.edit-item-pictures .picture {
+    border-radius: 8px;
+    
+}

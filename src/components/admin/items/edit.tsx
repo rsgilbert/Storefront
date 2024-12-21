@@ -13,6 +13,8 @@ import SkeletonDocument from "../../SkeletonDocument";
 import { Picture } from "../../Picture";
 import { Item } from "../../../decl";
 
+import './edit.scss'
+
 export default function EditItem() {
     const params = useParams() as { Id: string }
     const { data, isLoading, error } = useItemByIdQuery(params)
@@ -82,7 +84,7 @@ function EditItemForm({ item }: { item: Item }) {
 
                 </div>
             </Fieldset>
-            <ul className="mt-4">
+            <ul className="edit-item-pictures">
                 { item.Pictures.map(picture => (
                     <li key={picture.PictureUrl}>
                         <Picture picture={picture.PictureUrl} />

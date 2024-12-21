@@ -13,6 +13,10 @@ export interface ItemPicture {
     "PictureUrl": string,
     "ItemId": string
 }
+export interface CreateCartItem {
+    ItemId: string,
+    Quantity: number 
+}
 
 export interface CartItem {
     Id: string,

@@ -21,6 +21,7 @@ export const QuantityBoxCart = props => {
                 <input
                     type="number"
                     min="1"
+                    readOnly={true}
                     name="quantity"
                     placeholder="Quantity"
                     value={ props.quantity }

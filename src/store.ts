@@ -4,16 +4,19 @@ import cartReducer from './features/cart/cartSlice'
 import { itemServiceApi } from './components/admin/items/service'
 
 import { setupListeners } from '@reduxjs/toolkit/query'
+import { cartItemServiceApi } from './components/cart/service';
 
 export const store = configureStore({
   reducer: {
     search: searchReducer,
     cart: cartReducer,
     [itemServiceApi.reducerPath]: itemServiceApi.reducer,
+    [cartItemServiceApi.reducerPath]: cartItemServiceApi.reducer,
 
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
-    itemServiceApi.middleware
+    itemServiceApi.middleware,
+    cartItemServiceApi.middleware,
   )
 });
 
