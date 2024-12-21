@@ -6,7 +6,12 @@ import {Icon } from './Icon'
 
 import './EditPicture.css';
 
-export const EditPicture = props => {
+interface EditPictureProps {
+    picture: string,
+    onEdit: () => void,
+    onDelete: () => void 
+}
+export const EditPicture = (props: EditPictureProps) => {
     
 
     return (

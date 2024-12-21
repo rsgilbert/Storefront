@@ -41,6 +41,17 @@ export const itemServiceApi = createApi({
             invalidatesTags: ['Items'],
 
         }),
+        createItemPicture: builder.mutation<ItemPicture, ItemPicture>({
+            query: (args) => ({
+                url: `ItemPicture`,
+                method: 'POST',
+                providesTags: ['Items'],
+                body: args
+            }),
+            transformErrorResponse,
+            invalidatesTags: ['Items'],
+
+        }),
        
         updateItem: builder.mutation<Item, Item>({
             query: args => ({
@@ -80,5 +91,6 @@ export const {
     useUpdateItemMutation,
     useCreateItemMutation,
     useDeleteItemMutation,
+    useCreateItemPictureMutation
 
 } = itemServiceApi;

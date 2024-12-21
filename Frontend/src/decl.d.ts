@@ -9,5 +9,5 @@ interface Item {
 
 interface ItemPicture {
     "PictureUrl": string,
-    "ItemNo": string
+    "ItemId": string
 }

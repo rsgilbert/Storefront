@@ -7,3 +7,14 @@ To deploy on firebase
 
 To bulk rename all jsx files to tsx do, 
 ls -Recurse *.jsx | Rename-Item -NewName { $_.Name -replace '\.jsx$','.tsx' }
+
+// install amplify
+// see: https://docs.amplify.aws/react/start/account-setup/
+npm create amplify@latest
+
+
+// to login to aws:
+ aws sso login
+
+// configure sandbox 
+
