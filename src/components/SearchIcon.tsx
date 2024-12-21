@@ -12,7 +12,8 @@ export const SearchIcon = props => {
 
     return (
         <div 
-            onClick={goToSearch}>
+            // onClick={goToSearch}
+            >
             <img 
                 className="searchicon" 
                 src={ search } 
