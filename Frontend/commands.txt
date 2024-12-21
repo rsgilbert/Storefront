@@ -3,3 +3,7 @@ To deploy on firebase
 - Configure firestore on firebase first on the console website:
 - Run: firebase init
 - Run: firebase deploy
+
+
+To bulk rename all jsx files to tsx do, 
+Get-ChildItem *.jsx | Rename-Item -NewName { $_.Name -replace '\.jsx$','.tsx' } 
