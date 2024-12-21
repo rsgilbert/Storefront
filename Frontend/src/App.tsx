@@ -14,7 +14,10 @@ import { PicturesPage } from './features/pictures/PicturesPage';
 import { EditPage } from './features/edit/EditPage';
 import { initializeFirebase } from './functions';
 import { ManageItems } from './features/admin/items/ManageItems';
-
+import Items from './components/admin/items/list';
+import EditItem from './components/admin/items/edit';
+import NewItem from './components/admin/items/new';
+import './components/css/commandbar.scss'
 
 
 
@@ -43,27 +46,29 @@ const router = createBrowserRouter([
       },
       {
         path: '/admin',
-        element: <AdminPage />
+        element: <Navigate to="/admin/items" />
       },
-      {
-        path: '/admin/new',
-        element: <NewItemPage />
-      },
+    
       {
         path: "/admin/items/:id/pictures",
         element: <PicturesPage />
       },
-      {
-        path: "/admin/items/:id",
-        component: <EditPage />
-      },
+    
       {
         path: "/admin/items",
-        component: <ManageItems />
+        element: <Items />
+      },
+      {
+        path: "/admin/items/new",
+        element: <NewItem />
+      },
+      {
+        path: "/admin/items/:Id",
+        element: <EditItem />
       },
       {
         path: '/*',
-        component: <Navigate to='/' />
+        element: <Navigate to='/' />
       }
     ]
   },

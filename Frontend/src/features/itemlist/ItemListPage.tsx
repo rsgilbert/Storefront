@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { selectAllItems } from './itemlistSlice'
 import { Item } from '../../components/Item'
 import { Loading } from '../../components/Loading'
-import { useItemsQuery } from './service'
+import { useItemsQuery } from '../../components/admin/items/service'
 
 
 

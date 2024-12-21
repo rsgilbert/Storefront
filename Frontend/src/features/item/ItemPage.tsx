@@ -10,11 +10,11 @@ import './ItemPage.css'
 import { QuantityBox } from '../../components/QuantityBox'
 import { Loading } from '../../components/Loading'
 import { useLocation, useParams } from 'react-router-dom'
-import { useItemByNoQuery } from '../itemlist/service'
+import { useItemByIdQuery } from '../../components/admin/items/service'
 
 export const ItemCardPage = props => {
     const params = useParams()
-    const { data, error, isLoading } = useItemByNoQuery(params)
+    const { data, error, isLoading } = useItemByIdQuery(params)
 
 
     if (error) {

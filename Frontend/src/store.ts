@@ -3,7 +3,7 @@ import searchReducer from './features/search/searchSlice'
 import itemlistReducer from './features/itemlist/itemlistSlice'
 import cartReducer from './features/cart/cartSlice'
 import newitemReducer from './features/newitem/newitemSlice'
-import { itemServiceApi } from './features/itemlist/service'
+import { itemServiceApi } from './components/admin/items/service'
 
 import { setupListeners } from '@reduxjs/toolkit/query'
 

@@ -15,7 +15,7 @@ export const Header = props => {
         <div className="header-complexity">
 
             <div className="header-placeholder"></div>
-            <header className="header">  
+            <header className="header">
                 <div className="header-container">
                     <ul className="header-links header-start">
                         <li>
@@ -28,14 +28,17 @@ export const Header = props => {
 
                     <div className="header-center">
                         <Link to="/">
-                            <img className="header-logo" 
+                            <img className="header-logo"
                                 src={Info.smallLogoUrl} alt="logo" />
-                        </Link>                        
+                        </Link>
                     </div>
 
                     <ul className="header-links header-end">
                         <li>
-                            <AccountIcon />
+                            <Link to="/admin">
+                                <AccountIcon />
+                            </Link>
+
                         </li>
                         <li>
                             <Cart />

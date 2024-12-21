@@ -1,0 +1,44 @@
+@use "sass:color";
+
+$commandBarBackgroundColor : rgb(238, 253, 253);
+
+.commandbar {
+    margin: 16px 0;
+
+
+    ul {
+        background-color: $commandBarBackgroundColor;
+        display: flex;
+        flex-direction: row;
+        border-radius: 8px;
+        
+
+        li {
+            font-weight: 600;
+            text-transform: capitalize;
+            text-align: center;
+            padding-bottom: 4px;
+            min-width: 100px;
+
+            &:hover {
+                // background-color: darken($commandBarBackgroundColor, 55);
+                // font-weight: 700;
+                padding-bottom: 0;
+                // font-weight: 700;
+                border-bottom: 4px solid  color.adjust($commandBarBackgroundColor, $lightness: 55%);
+            }
+
+            .danger {
+                &:hover {
+                    background-color: lightcoral;
+                }
+            }
+
+            span, div, a, button  {
+                width: 100%;
+                display: block;
+                padding: 8px;
+            }
+        }
+    }
+}

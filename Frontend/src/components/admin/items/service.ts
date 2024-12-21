@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { errorMessageFor } from "../../data";
+import { errorMessageFor } from "../../../data";
 import { enqueueSnackbar } from "notistack";
-import configuration from "../../configuration";
+import configuration from "../../../configuration";
 
 
 
@@ -20,17 +20,17 @@ export const itemServiceApi = createApi({
 
     tagTypes: ['Items'],
     endpoints: (builder) => ({
-        items: builder.query({
+        items: builder.query<Item[], void>({
             query: () => `Item`,
             providesTags: ['Items'],
             transformErrorResponse,
         }),
-        itemByNo: builder.query({
+        itemById: builder.query<Item, { Id: string }>({
             query: (args) => `Item/${args.Id}`,
             providesTags: ['Items'],
             transformErrorResponse,
         }),
-        createItem: builder.mutation({
+        createItem: builder.mutation<Item, Item>({
             query: (args) => ({
                 url: `Item`,
                 method: 'POST',
@@ -41,8 +41,8 @@ export const itemServiceApi = createApi({
             invalidatesTags: ['Items'],
 
         }),
-
-        updateItem: builder.mutation({
+       
+        updateItem: builder.mutation<Item, Item>({
             query: args => ({
                 url: `Item/${args.Id}`,
                 method: 'PATCH',
@@ -52,7 +52,7 @@ export const itemServiceApi = createApi({
             transformErrorResponse,
             invalidatesTags: ['Items']
         }),
-        deleteItem: builder.mutation({
+        deleteItem: builder.mutation<void, { Id: string }>({
             query: ({ Id }) => ({
                 url: `Item/${Id}`,
                 method: 'delete',
@@ -64,19 +64,19 @@ export const itemServiceApi = createApi({
 });
 
 
-function transformErrorResponse(response) {
+function transformErrorResponse(response: any) {
     enqueueSnackbar(errorMessageFor(response), { variant: 'error' })
     return response
 }
 
-function transformResponseWithSnackbar(response, message) {
+function transformResponseWithSnackbar(response: any, message: string) {
     enqueueSnackbar(message, { variant: 'success' })
     return response
 }
 
 export const {
     useItemsQuery,
-    useItemByNoQuery,
+    useItemByIdQuery,
     useUpdateItemMutation,
     useCreateItemMutation,
     useDeleteItemMutation,

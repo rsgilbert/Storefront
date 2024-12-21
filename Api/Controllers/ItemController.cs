@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Api;
 using Api.Models;
 using Microsoft.EntityFrameworkCore;
+using Mysqlx;
 
 
 namespace Api.Controllers;
@@ -41,14 +42,20 @@ public class ItemController(ApiDbContext apiDbContext) : ControllerBase
         return item;
     }
 
-    //[HttpPatch]
-    //[Route("{No}")]
-    //public Item UpdateItem(string No, Item updateItem)
-    //{
-    //    Item item = updateItemDto.UpdateItem(apiDbContext);
-    //    apiDbContext.SaveChanges();
-    //    return apiDbContext.Items.Find(item.No)!;
-    //}
+    [HttpPut]
+    [HttpPatch]
+    [Route("{Id}")]
+    public Item UpdateItem(string Id, Item updateItem)
+    {
+       Item item = apiDbContext.Items.Find(Id)!;
+       if(updateItem.Id != Id) throw new ArgumentException("Wrong update item. Id does not match");
+       item.Description = updateItem.Description;
+       item.DetailedDescription = updateItem.DetailedDescription;
+       item.UnitPrice = updateItem.UnitPrice;
+       item.Model = updateItem.Model;
+       apiDbContext.SaveChanges();
+       return apiDbContext.Items.Find(Id)!;
+    }
 
     [HttpDelete]
     [Route("{No}")]
