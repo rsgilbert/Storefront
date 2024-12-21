@@ -5,6 +5,7 @@ import cartReducer from './features/cart/cartSlice'
 import newitemReducer from './features/newitem/newitemSlice'
 import { itemServiceApi } from './features/itemlist/service'
 
+import { setupListeners } from '@reduxjs/toolkit/query'
 
 export const store = configureStore({
   reducer: {
@@ -19,3 +20,12 @@ export const store = configureStore({
     itemServiceApi.middleware
   )
 });
+
+
+// optional but required for refetchOnFocus/refetchOnReconnect behaviors
+setupListeners(store.dispatch)
+
+export type MyRootState = ReturnType<typeof store.getState>
+
+// inferred type: { posts: PostsState, comments: CommentsState, users: UsersState }
+export type AppDispatch = typeof store.dispatch 

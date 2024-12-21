@@ -10,6 +10,7 @@ public class Item
     [Key]
     public required string Id { get; set; }
     public required string Description { get; set; }
+    public required string DetailedDescription {get;set;}
 
     public decimal UnitPrice { get; set; } 
     public required string Model {  get; set; }
