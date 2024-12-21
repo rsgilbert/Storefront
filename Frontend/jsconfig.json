@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "bundler",
+        "module": "ESNext",
+        "target": "ESNext",
+        "jsx": "react",
+        "allowJs": true,
+        "checkJs": true
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

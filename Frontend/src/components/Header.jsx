@@ -1,3 +1,4 @@
+import React from 'react'
 import './Header.css'
 import { useNavigate, Link } from 'react-router-dom'
 import { Cart } from './Cart'

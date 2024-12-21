@@ -5,7 +5,7 @@ import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-rou
 import { Footer } from './components/Footer'
 import { ItemListPage } from './features/itemlist/ItemListPage';
 import { Header } from './components/Header';
-import { ItemPage } from './features/item/ItemPage';
+import { ItemCardPage } from './features/item/ItemPage';
 import { CartPage } from './features/cart/CartPage';
 import { SearchPage } from './features/search/SearchPage';
 import { AdminPage } from './features/admin/AdminPage';
@@ -29,8 +29,8 @@ const router = createBrowserRouter([
         element: <ItemListPage />
       },
       {
-        path: '/items/:itemId',
-        element: <ItemPage />
+        path: '/items/:No',
+        element: <ItemCardPage />
       },
 
       {

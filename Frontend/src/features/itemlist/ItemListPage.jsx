@@ -4,30 +4,58 @@ import { useSelector } from 'react-redux'
 import { selectAllItems } from './itemlistSlice'
 import { Item } from '../../components/Item'
 import { Loading } from '../../components/Loading'
+import { useItemsQuery } from './service'
 
 
 
 export const ItemListPage = props => {
-    const { itemlist, status } = useSelector(selectAllItems)
-    
-    const renderItemList = itemlist.map(item => {
-        return (
-            <Item
-                item={item}
-                key={item.id} 
-                />
-        )
-    })
+    const { data, error, isLoading } = useItemsQuery()
 
-    if(status !== 'succeeded') {
+
+
+    
+
+    if (error) {
+        return (
+            <div>
+                {String(error)}
+            </div>
+        )
+    }
+
+    if (isLoading) {
         return <Loading />
     }
 
 
     return (
-            <div className="itemlist">                
-                {renderItemList}
-            </div>
+        <ItemList items={data} />
     )
 }
 
+
+
+export const ItemList = props => {
+    /** @type {Item[]} */
+    const items = props.items;
+
+    
+
+    const renderItemList = items.map(item => {
+        return (
+            <Item
+                item={item}
+                key={item.No}
+            />
+        )
+    })
+
+ 
+ 
+
+    return (
+        <div className="itemlist">
+            {renderItemList}
+        </div>
+    )
+}

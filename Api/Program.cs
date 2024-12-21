@@ -19,9 +19,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApiDbContext>(options =>
 {
     // see: https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MySql#readme-body-tab
-    string connectionString = builder.Configuration.GetConnectionString("DBConnection") ?? "No db connection string found!";
-    Console.WriteLine(connectionString);
-    options.UseMySQL(connectionString);
+    string connectionString = builder.Configuration.GetConnectionString("DBConnection") ?? "No DBConnection connection string found";
+    //Console.WriteLine(connectionString);
+     options.UseNpgsql(connectionString);
+    //options.UseMySQL(connectionString);
     // The following three options help with debugging, but should
     // be changed or removed for production.
     // options.LogTo(Console.WriteLine, LogLevel.Information);

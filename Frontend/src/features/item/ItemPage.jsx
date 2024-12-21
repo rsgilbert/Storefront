@@ -2,56 +2,78 @@ import React, { useState } from 'react'
 import { getIdFromWindow } from '../../functions'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectItem, selectAllItems } from '../itemlist/itemlistSlice'
-import  { cartAdded, selectIsCarted, selectCartItemQuantity } from '../cart/cartSlice'
+import { cartAdded, selectIsCarted, selectCartItemQuantity } from '../cart/cartSlice'
 import classNames from 'classnames'
 
 
 import './ItemPage.css'
 import { QuantityBox } from '../../components/QuantityBox'
 import { Loading } from '../../components/Loading'
+import { useLocation, useParams } from 'react-router-dom'
+import { useItemByNoQuery } from '../itemlist/service'
 
-export const ItemPage = props => {
-    const id = getIdFromWindow()
-    const { status, item } = useSelector(state => selectItem(state, id))
-    console.log(item)
+export const ItemCardPage = props => {
+    const params = useParams()
+    const { data, error, isLoading } = useItemByNoQuery(params)
+
+
+    if (error) {
+        return (
+            <div>
+                {String(error)}
+            </div>
+        )
+    }
+
+    if (isLoading) {
+        return <Loading />
+    }
+
+
+    return (
+        <ItemCard item={data} />
+    )
+}
+
+
+export const ItemCard = props => {
+    /** @type {Item} */
+    const item = props.item;
     const [currentPictureIdx, setCurrentPictureIdx] = useState(0)
     const dispatch = useDispatch()
-    const isCarted = useSelector(state => selectIsCarted(state, id))
-    const cartItemQuantity = useSelector(state => selectCartItemQuantity(state, id))
+    const isCarted = useSelector(state => selectIsCarted(state, item.No))
+    const cartItemQuantity = useSelector(state => selectCartItemQuantity(state, item.No))
     const [itemQuantity, setItemQuantity] = useState(isCarted ? cartItemQuantity : 1)
 
     const onQuantityChanged = itemQuantity => setItemQuantity(itemQuantity)
 
-    let content
-    if(status !== 'succeeded') {
-        return <Loading />
-    } 
 
-    const pictures = item.pictures
-    
-  
-    
+ 
+    const pictures = item.Pictures
+
+
+
     const renderNonCurrentPictures = () => pictures.map((picture, index) => {
         const changeCurrentPicture = () => setCurrentPictureIdx(index)
-        
-        if(pictures[currentPictureIdx] !== picture) {
+
+        if (pictures[currentPictureIdx] !== picture) {
             return (
-                <li  
+                <li
                     className="item-thumbnail"
                     onClick={changeCurrentPicture}
                     key={index}
-                    >
-                    <img 
-                        src={picture}
+                >
+                    <img
+                        src={picture.PictureUrl}
                         className="thumbnail-picture"
-                        />
+                    />
                 </li>
             )
-        } 
+        }
     })
 
     const addToCart = () => {
-        dispatch(cartAdded({ 
+        dispatch(cartAdded({
             ...item,
             itemQuantity
         }))
@@ -62,14 +84,14 @@ export const ItemPage = props => {
             <div>
                 <div className="item-images">
                     <div>
-                        <img    
+                        <img
                             className="item-current-image"
-                            src={pictures[currentPictureIdx]}
-                            />
+                            src={pictures[currentPictureIdx]?.PictureUrl}
+                        />
                     </div>
                     <div className="thumbnails">
                         <ul className="thumbnail-list">
-                            { renderNonCurrentPictures() }
+                            {renderNonCurrentPictures()}
                         </ul>
                     </div>
                 </div>
@@ -77,26 +99,25 @@ export const ItemPage = props => {
             <div className="item-details">
                 <div>
                     <h1>
-                        {item.name}
+                        {item.Description}
                     </h1>
                     <p>
-                        { item.specs}
+                        {item.Model}
                     </p>
-                    <h2>{item.price}</h2>
+                    <h2>{item.UnitPrice}</h2>
                     <div>
-                        <QuantityBox 
+                        <QuantityBox
                             quantity={itemQuantity}
                             onQuantityChanged={onQuantityChanged} />
                     </div>
                 </div>
                 <div className="item-actions">
-                    <button 
-                        className="add-to-cart"
+                    <button
                         onClick={addToCart}
-                        className={classNames({
+                        className={classNames("add-to-cart", {
                             iscarted: isCarted
                         })}>
-                        { isCarted ? "CARTED" : "ADD TO CART" }
+                        {isCarted ? "CARTED" : "ADD TO CART"}
                     </button>
                     <button className="buy-it-now">
                         BUY IT NOW
@@ -104,13 +125,13 @@ export const ItemPage = props => {
                 </div>
 
                 <div className="item-info">
-                    
+
                     <p>
-                        {item.description}
+                        {item.Model}
                     </p>
                     {/* <p>{item.quantity} </p> */}
                 </div>
-                
+
 
             </div>
         </div>

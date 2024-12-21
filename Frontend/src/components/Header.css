@@ -11,12 +11,12 @@
 }
 
 .header-placeholder { 
-    height: 5.5em;
+    height: 5em;
 }
 
 .header-container {
     margin: 0 auto;
-    padding: .2em .5em;
+    padding: .1em .5em;
     position: relative;
     display: flex;
     align-items: center;
@@ -38,7 +38,7 @@
 .header-logo {
     /* width: 5em; */
     cursor: pointer;
-    max-height: 80px;
+    max-height: 55px;
     /* position: absolute;
     top: .5em;
     left: 1em; */

@@ -1,7 +1,7 @@
 // A tiny wrapper around fetch(), borrowed from
 // https://kentcdodds.com/blog/replace-axios-with-a-simple-custom-fetch-wrapper
 
-export async function client(endpoint, { body, ...customConfig } = {}) {
+export async function client(relativeUrl, { body, ...customConfig } = {}) {
     const headers = { 'Content-Type': 'application/json' }
   
     const config = {
@@ -19,7 +19,7 @@ export async function client(endpoint, { body, ...customConfig } = {}) {
   
     let data
     try {
-      const response = await window.fetch(endpoint, config)
+      const response = await window.fetch(relativeUrl, config)
       data = await response.json()
       if (response.ok) {
         return data

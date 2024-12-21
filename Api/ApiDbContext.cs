@@ -8,6 +8,12 @@ namespace Api;
 public class ApiDbContext(DbContextOptions<ApiDbContext> options) : IdentityDbContext<ApplicationUser>(options)
 {
 
+    static ApiDbContext()
+    {
+        // see: https://stackoverflow.com/a/73586129/10030693
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+    }
+
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
         configurationBuilder.Properties<decimal>()
@@ -26,6 +32,7 @@ public class ApiDbContext(DbContextOptions<ApiDbContext> options) : IdentityDbCo
     }
 
 
-    public DbSet<Tender> Tenders { get; set; }
+    public DbSet<Item> Items { get; set; }
+    public DbSet<ItemPicture> ItemPictures { get;set; }
 
 }
