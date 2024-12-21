@@ -6,4 +6,4 @@ To deploy on firebase
 
 
 To bulk rename all jsx files to tsx do, 
-Get-ChildItem *.jsx | Rename-Item -NewName { $_.Name -replace '\.jsx$','.tsx' } 
+ls -Recurse *.jsx | Rename-Item -NewName { $_.Name -replace '\.jsx$','.tsx' }

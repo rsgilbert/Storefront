@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Item } from '../../components/Item.jsx'
+import { Item } from '../../components/Item'
 import * as firebase from "firebase/app"
 import "firebase/firestore"
 import "firebase/storage"
 import './NewItemPage.css'
 import { useNavigate } from 'react-router-dom'
-import { newitemUpdated } from './newitemSlice.js'
-import { PageTitle } from '../../components/PageTitle.jsx'
-import { ActionButton } from '../../components/ActionButton.jsx'
+import { PageTitle } from '../../components/PageTitle'
+import { ActionButton } from '../../components/ActionButton'
 
 
 
