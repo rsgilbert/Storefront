@@ -3,17 +3,12 @@ import './App.css';
 import './CustomStyles.css'
 import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Footer } from './components/Footer'
-import { ItemListPage } from './features/itemlist/ItemListPage';
+import { ItemListPage } from './components/ItemListPage';
 import { Header } from './components/Header';
-import { ItemCardPage } from './features/item/ItemPage';
+import { ItemCardPage } from './components/ItemPage';
 import { CartPage } from './features/cart/CartPage';
 import { SearchPage } from './features/search/SearchPage';
-import { AdminPage } from './features/admin/AdminPage';
-import { NewItemPage } from './features/newitem/NewItemPage';
 import { PicturesPage } from './features/pictures/PicturesPage';
-import { EditPage } from './features/edit/EditPage';
-import { initializeFirebase } from './functions';
-import { ManageItems } from './features/admin/items/ManageItems';
 import Items from './components/admin/items/list';
 import EditItem from './components/admin/items/edit';
 import NewItem from './components/admin/items/new';

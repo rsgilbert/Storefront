@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import { getIdFromWindow } from '../../functions'
+import { getIdFromWindow } from '../functions'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectItem, selectAllItems } from '../itemlist/itemlistSlice'
-import { cartAdded, selectIsCarted, selectCartItemQuantity } from '../cart/cartSlice'
+import { selectItem, selectAllItems } from '../features/itemlist/itemlistSlice'
+import { cartAdded, selectIsCarted, selectCartItemQuantity } from '../features/cart/cartSlice'
 import classNames from 'classnames'
 
 
 import './ItemPage.css'
-import { QuantityBox } from '../../components/QuantityBox'
-import { Loading } from '../../components/Loading'
+import { QuantityBox } from './QuantityBox'
+import { Loading } from './Loading'
 import { useLocation, useParams } from 'react-router-dom'
-import { useItemByIdQuery } from '../../components/admin/items/service'
+import { useItemByIdQuery } from './admin/items/service'
 
 export const ItemCardPage = props => {
     const params = useParams()
@@ -35,8 +35,10 @@ export const ItemCardPage = props => {
     )
 }
 
-
-export const ItemCard = props => {
+interface ItemCardProps {
+    item: Item 
+}
+export const ItemCard = (props: ItemCardProps) => {
     /** @type {Item} */
     const item = props.item;
     const [currentPictureIdx, setCurrentPictureIdx] = useState(0)
@@ -45,7 +47,7 @@ export const ItemCard = props => {
     const cartItemQuantity = useSelector(state => selectCartItemQuantity(state, item.Id))
     const [itemQuantity, setItemQuantity] = useState(isCarted ? cartItemQuantity : 1)
 
-    const onQuantityChanged = itemQuantity => setItemQuantity(itemQuantity)
+    const onQuantityChanged = (itemQuantity: number) => setItemQuantity(itemQuantity)
 
 
  

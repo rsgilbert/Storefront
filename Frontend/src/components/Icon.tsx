@@ -3,8 +3,10 @@ import React from 'react'
 
 import './Icon.css'
 
-
-export const Icon = props => {
+interface IconProps {
+    icon: string 
+}
+export const Icon = (props: IconProps) => {
     return (
         <div className="icon-container">
             <img 

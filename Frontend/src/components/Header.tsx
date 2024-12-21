@@ -7,7 +7,7 @@ import { HamburgerIcon } from './HamburgerIcon'
 import { AccountIcon } from './AccountIcon'
 import { Info } from './info'
 
-export const Header = props => {
+export const Header = () => {
     const navigate = useNavigate()
     const goToHome = () => { navigate("/") }
 

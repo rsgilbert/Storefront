@@ -5,13 +5,14 @@ import { Link } from 'react-router-dom'
 import { QuantityBox } from '../../components/QuantityBox'
 import './CartPage.css'
 import { QuantityBoxCart } from '../../components/QuantityBoxCart'
+import { Cart, CartItem } from '../../decl'
 
-export const CartPage = props => {
-    const cart = useSelector(selectAllCartItems)
+export const CartPage = () => {
+    const cart: Cart = useSelector<void, Cart>(selectAllCartItems)
     const dispatch = useDispatch()
 
     let total = 0
-    cart.map(cartItem => total += cartItem.price * cartItem.itemQuantity)
+    cart.map((cartItem : CartItem)=> total += cartItem.ItemUnitPrice * cartItem.ItemQuantity)
 
     
 
@@ -26,15 +27,15 @@ export const CartPage = props => {
 
 
     const renderCartItems = () => cart.map(cartItem => { 
-        const setItemQuantity = itemQuantity => {
+        const setItemQuantity = (itemQuantity: number) => {
             dispatch(cartItemQuantityUpdated({
-                cartItemId: cartItem.id,
+                cartItemId: cartItem.Id,
                 itemQuantity
             }))
         }
 
         const removeFromCart = () => {
-            dispatch(cartItemRemoved({ id: cartItem.id }))
+            dispatch(cartItemRemoved({ id: cartItem.Id }))
         }
         
         return (
@@ -42,19 +43,19 @@ export const CartPage = props => {
                 <div className="cart-item">
                     <div className="cart-item-info">   
                         <img 
-                            src={cartItem.pictures[0]}
+                            src={cartItem.ItemPictureUrl}
                             className="cart-item-thumbnail"
                             />
-                        <p>{ cartItem.name }</p>
+                        <p>{ cartItem.ItemDescription }</p>
                     </div>
                     <div className="price-and-quantity">
-                        <p>{ cartItem.price.toLocaleString() }</p>
+                        <p>{ `${cartItem.ItemQuantity} ${cartItem.ItemQuantity}` }</p>
                         <QuantityBoxCart 
-                            quantity={cartItem.itemQuantity}
+                            quantity={cartItem.ItemQuantity}
                             onQuantityChanged={setItemQuantity} />
                         <div className="cart-item-info info-desc-total">
                             <p className="info-desc">Total: </p>
-                            <p>{ (cartItem.itemQuantity * cartItem.price).toLocaleString() }</p>
+                            <p>{ (cartItem.ItemQuantity * cartItem.ItemUnitPrice).toLocaleString() }</p>
                         </div>
                     </div>
                 </div>

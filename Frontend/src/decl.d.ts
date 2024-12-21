@@ -1,4 +1,4 @@
-interface Item {
+export interface Item {
     Id: string,
     Description: string,
     DetailedDescription: string,
@@ -7,7 +7,18 @@ interface Item {
     Pictures: ItemPicture[]
 }
 
-interface ItemPicture {
+export interface ItemPicture {
     "PictureUrl": string,
     "ItemId": string
 }
+
+export interface CartItem {
+    Id: string,
+    ItemId: string,
+    ItemUnitPrice: number;
+    ItemQuantity: number;
+    ItemDescription: number;
+    ItemPictureUrl: string 
+}
+
+export type Cart  = CartItem[]

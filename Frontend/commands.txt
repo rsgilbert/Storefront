@@ -17,4 +17,6 @@ npm create amplify@latest
  aws sso login
 
 // configure sandbox 
+npx ampx sandbox
+
 

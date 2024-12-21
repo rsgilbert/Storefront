@@ -1,14 +1,12 @@
 import React from 'react'
 import './ItemListPage.css'
-import { useSelector } from 'react-redux'
-import { selectAllItems } from './itemlistSlice'
-import { Item } from '../../components/Item'
-import { Loading } from '../../components/Loading'
-import { useItemsQuery } from '../../components/admin/items/service'
+import { Item } from './Item'
+import { Loading } from './Loading'
+import { useItemsQuery } from './admin/items/service'
 
 
 
-export const ItemListPage = props => {
+export const ItemListPage = () => {
     const { data, error, isLoading } = useItemsQuery()
 
 
@@ -29,13 +27,16 @@ export const ItemListPage = props => {
 
 
     return (
-        <ItemList items={data} />
+        <ItemList items={data!} />
     )
 }
 
 
+interface ItemListProps {
+    items: Item[]
+}
 
-export const ItemList = props => {
+export const ItemList = (props: ItemListProps) => {
     /** @type {Item[]} */
     const items = props.items;
 
