@@ -25,7 +25,7 @@ export const DetailForm = props => {
     const onPriceChanged = e => setPrice(parseInt(e.target.value))
     const onDescriptionChanged = e => setDescription(e.target.value)
   
-    const db = firebase.firestore()
+    // const db = firebase.firestore()
     
     const onSubmitForm = e => {
         e.preventDefault()
@@ -34,13 +34,13 @@ export const DetailForm = props => {
     const saveAndGoToPictures = async () => {
         const time = new Date().getTime()
         const timeString = time.toString()
-        await db.collection("items")
-            .doc(timeString)
-            .set({
-                id: timeString,
-                createdAt: time,
-                name, price, specs, description, category
-            })
+        // await db.collection("items")
+        //     .doc(timeString)
+        //     .set({
+        //         id: timeString,
+        //         createdAt: time,
+        //         name, price, specs, description, category
+        //     })
         navigate(`/admin/items/${timeString}/pictures`)
     }
 
@@ -101,8 +101,7 @@ export const DetailForm = props => {
                     </label>
                     <textarea
                         id="description"
-                        type="text"
-                        rows="3"
+                        rows={3}
                         value={description}
                         className="new-textarea"
                         onChange={onDescriptionChanged}

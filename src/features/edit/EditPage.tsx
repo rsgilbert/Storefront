@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { getIdFromPath } from '../../functions'
-import { useSelector, useDispatch } from 'react-redux'
-import { selectItem, selectAllItems } from '../itemlist/itemlistSlice'
 import classNames from 'classnames'
 import * as firebase from "firebase/app"
 import "firebase/firestore"

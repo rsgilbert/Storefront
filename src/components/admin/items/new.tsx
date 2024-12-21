@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../catalyst/button";
 import { useCreateItemMutation } from "./service";
 import { Heading } from "../../catalyst/heading";
+import { Item } from "../../../decl";
 
 
 export default function NewItem() {

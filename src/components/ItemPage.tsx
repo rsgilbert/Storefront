@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import { getIdFromWindow } from '../functions'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectItem, selectAllItems } from '../features/itemlist/itemlistSlice'
 import { cartAdded, selectIsCarted, selectCartItemQuantity } from '../features/cart/cartSlice'
 import classNames from 'classnames'
 
@@ -11,9 +9,11 @@ import { QuantityBox } from './QuantityBox'
 import { Loading } from './Loading'
 import { useLocation, useParams } from 'react-router-dom'
 import { useItemByIdQuery } from './admin/items/service'
+import { MyRootState } from '../store'
+import { Item } from '../decl'
 
 export const ItemCardPage = props => {
-    const params = useParams()
+    const params = useParams() as { Id: string }
     const { data, error, isLoading } = useItemByIdQuery(params)
 
 
@@ -43,8 +43,8 @@ export const ItemCard = (props: ItemCardProps) => {
     const item = props.item;
     const [currentPictureIdx, setCurrentPictureIdx] = useState(0)
     const dispatch = useDispatch()
-    const isCarted = useSelector(state => selectIsCarted(state, item.Id))
-    const cartItemQuantity = useSelector(state => selectCartItemQuantity(state, item.Id))
+    const isCarted = useSelector((state: MyRootState) => selectIsCarted(state, item.Id))
+    const cartItemQuantity = useSelector((state: MyRootState) => selectCartItemQuantity(state, item.Id))
     const [itemQuantity, setItemQuantity] = useState(isCarted ? cartItemQuantity : 1)
 
     const onQuantityChanged = (itemQuantity: number) => setItemQuantity(itemQuantity)

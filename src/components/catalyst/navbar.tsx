@@ -73,6 +73,7 @@ export const NavbarItem = React.forwardRef(function NavbarItem(
           {...props}
           className={classes}
           data-current={current ? 'true' : undefined}
+          // @ts-ignore
           ref={ref as React.ForwardedRef<HTMLAnchorElement>}
         >
           <TouchTarget>{children}</TouchTarget>

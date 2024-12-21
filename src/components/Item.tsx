@@ -1,12 +1,13 @@
 import React from 'react'
 import './Item.css'
 import { useNavigate } from 'react-router-dom'
+import { ItemRecord } from '../decl'
 
 
 
 /**
  * 
- * @param {{item: Item}} param0 
+ * @param {{item: ItemRecord}} param0 
  * @returns 
  */
 export const Item = ({ item }) => {

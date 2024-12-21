@@ -6,8 +6,6 @@ import './PicturesPage.css'
 import { getIdFromWindow, getIdFromPath } from '../../functions'
 import { useNavigate, Link } from 'react-router-dom'
 import { PageTitle } from '../../components/PageTitle'
-import { ActionButton } from '../../components/ActionButton'
-import { EditPicture } from '../../components/EditPicture'
 
 
 

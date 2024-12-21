@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
 import './SearchPage.css'
 import cancel from '../../icons/cancel.svg'
 import { Icon } from '../../components/Icon'
-import { selectAllItems } from '../itemlist/itemlistSlice'
 import { SearchItem } from '../../components/SearchItem'
+import { useItemsQuery } from '../../components/admin/items/service'
 
 
-export const SearchPage = props => {
+export const SearchPage = () => {
     const dispatch = useDispatch()
-    const itemlist = useSelector(selectAllItems)
+    const {data, error, isLoading } = useItemsQuery()
     const [search, setSearch] = useState("")
 
-    const searchItems = itemlist.filter(item => {
-        return item.name.toLowerCase().includes(search)
-            || item.description.toLowerCase().includes(search)
-            || item.specs.toLowerCase().includes(search)
+    if(isLoading) return (<div>Loading...</div>)
+        if(error) return (<div>Error occurred {String(error)}</div>)
+
+    const searchItems = data!.filter(item => {
+        return JSON.stringify(item).toLowerCase().includes(search.toLowerCase())
     })
 
     const onSearchChanged = e => setSearch(e.target.value.toLowerCase())
@@ -45,7 +45,7 @@ export const SearchPage = props => {
     const renderSearchItems = () => searchItems.map(item => {
 
         return (
-            <SearchItem item={item} key={item.id}/>
+            <SearchItem item={item} key={item.Id}/>
         )
     })
         

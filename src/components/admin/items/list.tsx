@@ -9,6 +9,7 @@ import { useItemsQuery } from "./service"
 import { ErrorBox } from "../../ErrorBox"
 import ItemsCommandBar from "./list-commandbar"
 import { Heading } from "../../catalyst/heading"
+import { Item } from "../../../decl"
 
 function LoadingScreen() {
     return (<SkeletonTableBody columns={5} rows={3} />)

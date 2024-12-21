@@ -8,7 +8,7 @@ import { QuantityBoxCart } from '../../components/QuantityBoxCart'
 import { Cart, CartItem } from '../../decl'
 
 export const CartPage = () => {
-    const cart: Cart = useSelector<void, Cart>(selectAllCartItems)
+    const cart: Cart = useSelector<any, Cart>(selectAllCartItems)
     const dispatch = useDispatch()
 
     let total = 0

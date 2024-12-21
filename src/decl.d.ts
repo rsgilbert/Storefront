@@ -7,6 +7,8 @@ export interface Item {
     Pictures: ItemPicture[]
 }
 
+export type ItemRecord = Item;
+
 export interface ItemPicture {
     "PictureUrl": string,
     "ItemId": string

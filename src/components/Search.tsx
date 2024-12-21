@@ -4,8 +4,8 @@ import { selectSearch, searchUpdated } from '../features/search/searchSlice'
 import { useSelector, useDispatch } from 'react-redux'
 
 
-export const Search = props => {
-    const search = useSelector(selectSearch)
+export const Search = () => {
+    const search = useSelector<any,string>(selectSearch)
     const dispatch = useDispatch()
 
     const onSearchChanged = e =>

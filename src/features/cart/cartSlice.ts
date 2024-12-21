@@ -56,7 +56,7 @@ export const selectIsCarted = (state, itemId) => {
 export const selectCartItemQuantity = (state: MyRootState, Id: string) => {
     // @ts-ignore
     const cartItem = state.cart.cart.find(item => item.Id === Id)
-    return cartItem ? cartItem.itemQuantity : undefined
+    return cartItem ? cartItem.ItemQuantity : undefined
 }
 
 

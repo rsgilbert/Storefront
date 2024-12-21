@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { errorMessageFor } from "../../../data";
 import { enqueueSnackbar } from "notistack";
 import configuration from "../../../configuration";
+import { Item, ItemPicture } from "../../../decl";
 
 
 

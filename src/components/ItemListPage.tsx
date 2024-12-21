@@ -3,6 +3,7 @@ import './ItemListPage.css'
 import { Item } from './Item'
 import { Loading } from './Loading'
 import { useItemsQuery } from './admin/items/service'
+import { ItemRecord } from '../decl'
 
 
 
@@ -33,7 +34,7 @@ export const ItemListPage = () => {
 
 
 interface ItemListProps {
-    items: Item[]
+    items: ItemRecord[]
 }
 
 export const ItemList = (props: ItemListProps) => {

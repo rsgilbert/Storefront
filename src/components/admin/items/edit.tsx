@@ -11,6 +11,7 @@ import { useItemByIdQuery, useUpdateItemMutation } from "./service";
 import EditItemCommandBar from "./edit-commandbar";
 import SkeletonDocument from "../../SkeletonDocument";
 import { Picture } from "../../Picture";
+import { Item } from "../../../decl";
 
 export default function EditItem() {
     const params = useParams() as { Id: string }
