@@ -41,8 +41,8 @@ export const ItemCard = props => {
     const item = props.item;
     const [currentPictureIdx, setCurrentPictureIdx] = useState(0)
     const dispatch = useDispatch()
-    const isCarted = useSelector(state => selectIsCarted(state, item.No))
-    const cartItemQuantity = useSelector(state => selectCartItemQuantity(state, item.No))
+    const isCarted = useSelector(state => selectIsCarted(state, item.Id))
+    const cartItemQuantity = useSelector(state => selectCartItemQuantity(state, item.Id))
     const [itemQuantity, setItemQuantity] = useState(isCarted ? cartItemQuantity : 1)
 
     const onQuantityChanged = itemQuantity => setItemQuantity(itemQuantity)

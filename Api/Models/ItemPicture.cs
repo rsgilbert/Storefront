@@ -9,11 +9,11 @@ public class ItemPicture
 {
     [Key]
     public required string PictureUrl { get; set; }
-    public required string ItemNo { get; set; }
+    public required string ItemId { get; set; }
 
 
 
-    [ForeignKey(nameof(ItemNo))]
+    [ForeignKey(nameof(ItemId))]
     public virtual Item? Item { get; set; }
 
 }

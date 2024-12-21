@@ -1,5 +1,5 @@
 interface Item {
-    No: string,
+    Id: string,
     Description: string,
     UnitPrice: number;
     Model: string,

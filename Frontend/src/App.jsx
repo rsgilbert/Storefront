@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         element: <ItemListPage />
       },
       {
-        path: '/items/:No',
+        path: '/items/:Id',
         element: <ItemCardPage />
       },
 

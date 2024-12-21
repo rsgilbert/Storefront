@@ -21,14 +21,14 @@ public class ItemController(ApiDbContext apiDbContext) : ControllerBase
     }
 
     [HttpGet]
-    [Route("{No}")]
-    public Item GetItem(string No)
+    [Route("{Id}")]
+    public Item GetItem(string Id)
     {
         Item? item = apiDbContext.Items
         .Include(i => i.Pictures)
-        .Where(i => i.No == No)
+        .Where(i => i.Id == Id)
         .First();
-        if (item == default) throw new Exception($"Item ${No} Not Found");
+        if (item == default) throw new Exception($"Item ${Id} Not Found");
         return item;
     }
 
@@ -37,7 +37,7 @@ public class ItemController(ApiDbContext apiDbContext) : ControllerBase
     {
         apiDbContext.Items.Add(item);
         await apiDbContext.SaveChangesAsync();
-        item = (await apiDbContext.Items.FindAsync(item.No))!;
+        item = (await apiDbContext.Items.FindAsync(item.Id))!;
         return item;
     }
 

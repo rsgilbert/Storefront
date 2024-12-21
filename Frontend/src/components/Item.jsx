@@ -14,7 +14,7 @@ export const Item = ({ item }) => {
     const picture = item.Pictures[0]
 
     const goToItemPage = () => {
-        navigate(`/items/${item.No}`)
+        navigate(`/items/${item.Id}`)
     }
 
 

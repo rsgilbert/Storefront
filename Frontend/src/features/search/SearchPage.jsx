@@ -56,7 +56,7 @@ export const SearchPage = props => {
         if(!searchItems.length) {
             return (
                 <div className="search-empty">
-                    <p>No item found!</p>
+                    <p>Id item found!</p>
                 </div>
             )
         }

@@ -26,7 +26,7 @@ export const itemServiceApi = createApi({
             transformErrorResponse,
         }),
         itemByNo: builder.query({
-            query: (args) => `Item/${args.No}`,
+            query: (args) => `Item/${args.Id}`,
             providesTags: ['Items'],
             transformErrorResponse,
         }),
